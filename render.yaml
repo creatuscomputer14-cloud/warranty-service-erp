@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: warranty-service-erp
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_FILE
+        value: /var/data/warranty_erp.sqlite
+      - key: BOOTSTRAP_ADMIN_EMAIL
+        sync: false
+      - key: BOOTSTRAP_ADMIN_PASSWORD
+        generateValue: true
+      - key: APP_ORIGIN
+        sync: false
+    disk:
+      name: warranty-erp-data
+      mountPath: /var/data
+      sizeGB: 1
